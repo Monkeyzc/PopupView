@@ -37,7 +37,7 @@
         NSLog(@"saoyisao");
     }];
     
-    [PopupView showPopupView];
+    [PopupView popupView];
 }
 
 @end

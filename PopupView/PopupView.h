@@ -9,16 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PopupView : UIView
-
-
-+ (instancetype)shareInstance;
-
 + (void)addCellWithIcon:(UIImage *)icon text:(NSString *)text action: (void (^) ())action;
-
-+ (void)show;
-+ (void)hide;
-
-+ (void)showPopupView;
-
-
++ (void)popupView;
 @end

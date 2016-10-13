@@ -44,8 +44,7 @@ BOOL isShow = NO;
         self.rows = 0;
         self.Triangle = [[UIImageView alloc] initWithImage:[PopupView drawTriangle]];
         self.bgView = [[UIView alloc] init];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:popupView action:@selector(clickBgViewToHide)];
-        [self.bgView addGestureRecognizer:tap];
+        self.bgView.backgroundColor = [UIColor purpleColor];
     }
     return self;
 }
@@ -118,7 +117,7 @@ BOOL isShow = NO;
     [popupView.actionBlocks addObject: (action ? [action copy] : [NSNull null])];
 }
 
-+ (void)showPopupView {
++ (void)popupView {
     isShow = !isShow;
     isShow == YES ? [PopupView show] : [PopupView hide];
 }
@@ -132,6 +131,8 @@ BOOL isShow = NO;
     
     
     popupView.bgView.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:popupView action:@selector(clickBgViewToHide)];
+    [popupView.bgView addGestureRecognizer:tap];
     [window addSubview:popupView.bgView];
     
     popupView.Triangle.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - devicePadding - Trianglewidth * 2, 64 + 2, Trianglewidth * 2, Trianglewidth * 2);
@@ -185,16 +186,14 @@ BOOL isShow = NO;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id block = self.actionBlocks[indexPath.row];
     if (![block isEqual:[NSNull null]]) {
-        [PopupView hide];
+        [PopupView popupView];
         ((void (^)())block)();
     }
 }
 
 - (void)clickBgViewToHide{
-    NSLog(@"%d", isShow);
-    if (isShow) {
-        [PopupView hide];
-    }
+    NSLog(@"clickBgViewToHide");
+    [PopupView popupView];
 }
 
 @end
