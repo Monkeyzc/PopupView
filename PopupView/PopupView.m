@@ -77,6 +77,7 @@ BOOL isShow = NO;
         _tableView.dataSource = popupView;
         _tableView.delegate = popupView;
         _tableView.rowHeight = rowHeight;
+        _tableView.scrollEnabled = NO;
         [self addSubview:_tableView];
     }
     return _tableView;
@@ -129,7 +130,6 @@ BOOL isShow = NO;
         popupView = [PopupView shareInstance];
     }
     
-    
     popupView.bgView.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:popupView action:@selector(clickBgViewToHide)];
     [popupView.bgView addGestureRecognizer:tap];
@@ -152,6 +152,7 @@ BOOL isShow = NO;
     if (popupView == nil) {
         return;
     }
+    popupView.rows = 0;
     [popupView.bgView removeFromSuperview];
     [popupView.Triangle removeFromSuperview];
     [popupView removeFromSuperview];
