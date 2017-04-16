@@ -42,7 +42,7 @@ static CGFloat iconSize = 16;
         
         self.titleLable = [[UILabel alloc] init];
         self.titleLable.textColor = [UIColor blackColor];
-        self.titleLable.font = [UIFont systemFontOfSize:14];
+        self.titleLable.font = [UIFont systemFontOfSize:14 * autoSizeScaleX];
         [self.contentView addSubview:self.titleLable];
         
         //添加分割线
@@ -50,37 +50,31 @@ static CGFloat iconSize = 16;
         self.separatorLineView.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:self.separatorLineView];
         self.separatorLineView.hidden = YES;
+
+        [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.contentView).offset(padding * autoSizeScaleX);
+            make.centerY.equalTo(self.contentView);
+            make.width.equalTo(@(iconSize * autoSizeScaleX));
+            make.height.equalTo(@(iconSize * autoSizeScaleX));
+        }];
         
-        [self.contentView addSubview:self.separatorLineView];
+        [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.iconView.mas_trailing).offset(padding * autoSizeScaleX);
+            make.centerY.equalTo(self.contentView);
+            make.trailing.equalTo(self.contentView).offset(-padding * autoSizeScaleX);
+            make.bottom.equalTo(self.contentView);
+        }];
+        
+        [self.separatorLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.contentView);
+            make.trailing.equalTo(self.contentView);
+            make.bottom.equalTo(self.contentView.mas_bottom);
+            make.height.equalTo(@(1 / ([UIScreen mainScreen].scale)));
+        }];
+        
     
     }
     return self;
-}
-
-- (void)layoutSubviews{
-    
-    [super layoutSubviews];
-    
-    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.contentView).offset(padding);
-        make.centerY.equalTo(self.contentView);
-        make.width.equalTo(@(iconSize));
-        make.height.equalTo(@(iconSize));
-    }];
-    
-    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.iconView.mas_trailing).offset(padding);
-        make.centerY.equalTo(self.contentView);
-        make.trailing.equalTo(self.contentView).offset(-padding);
-        make.bottom.equalTo(self.contentView);
-    }];
-    
-    [self.separatorLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.textLabel);
-        make.trailing.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView.mas_bottom);
-        make.height.equalTo(@(1 / ([UIScreen mainScreen].scale)));
-    }];
 }
 
 -(void)setHaveSeparatorLine:(BOOL)haveSeparatorLine{

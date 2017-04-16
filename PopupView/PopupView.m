@@ -9,8 +9,10 @@
 #import "PopupView.h"
 #import "PopupViewCell.h"
 
+
+
 static CGFloat devicePadding = 20.0f;
-static CGFloat popupViewWidth = 120.f;
+static CGFloat popupViewWidth = 140.0f;
 static CGFloat popupViewpadding = 8.0f;
 static CGFloat Trianglewidth = 3;
 static CGFloat rowHeight = 32.f;
@@ -140,7 +142,7 @@ BOOL isShow = NO;
     popupView.layer.masksToBounds = YES;
     [window addSubview:popupView.Triangle];
     
-    popupView.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - popupViewWidth - popupViewpadding, CGRectGetMaxY(popupView.Triangle.frame), popupViewWidth, rowHeight * popupView.rows);
+    popupView.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - popupViewWidth * autoSizeScaleX - popupViewpadding, CGRectGetMaxY(popupView.Triangle.frame), popupViewWidth * autoSizeScaleX, rowHeight * popupView.rows);
     
     [popupView addSubview: popupView.tableView];
     

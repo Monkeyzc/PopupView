@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+// base iphone 6s
+#define autoSizeScaleX  ([UIScreen mainScreen].bounds.size.width / 375)
+#define autoSizeScaleY  ([UIScreen mainScreen].bounds.size.height / 667)
+
 @interface PopupViewCell : UITableViewCell
 
 + (instancetype)popupViewCellWithTableView:(UITableView *)tableView;
